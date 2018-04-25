@@ -43,6 +43,42 @@
 </p>
 <p>Entire repository, including Notebook files, are available at <a href="https://github.com/neurord/D1pathways">https://github.com/neurord/D1pathways</a>
 </p>
+<p/>Additional running instructions:
+<p>To run the main simulations, use the following syntax:
+First, run the simulations with no stimulation to reach steady state:<p/>
+java -jar  /home/neuroware/stochdif/neurord-3.2.3-all-deps.jar Model_SPNspineAChm4R_Gshydr5_GapD-nostim.xml 
+</p><p>Then, use output from the above as initial conditions, and run the main simulations for three trials each:<p/>
+java -jar  /home/neuroware/stochdif/neurord-3.2.3-all-deps.jar --ic-time -1 --ic Model_SPNspineAChm4R_Gshydr5_GapD-nostim.h5 -v -s injections -Dneurord.trials=3 Model_SPNspineAChm4R_Gshydr5_GapD-stimtheta-noReb_DaDec1.xml &amp;<br/>
+java -jar  /home/neuroware/stochdif/neurord-3.2.3-all-deps.jar --ic-time -1 --ic Model_SPNspineAChm4R_Gshydr5_GapD-nostim.h5 -v -s injections -Dneurord.trials=3 Model_SPNspineAChm4R_Gshydr5_GapD-stim20hz-noReb_lowDaDec3.xml &amp;<br/>
+</p><p>To generate output files for creating panels for figure 2A-C, run nrdh5_anal.py 
+First, set outputavg=1 in nrdh5_anal.py to produce output files.  Then, from within python type 
+<p/>&gt;&gt;&gt; ARGS="/full/path/to/Model_SPNspineAChm4R_Gshydr5_GapD-stim20hz,noReb,Ca Da ACh,10 20"
+<br/>&gt;&gt;&gt; execfile('/full/path/to/NeuroRDanal/nrdh5_anal.py')
+<p/>This processes h5 files whose filename matches the following pattern: arg[0]+'-'+arg[1]+'*.h5'
+And then produces output with filename = input_filename + molname+'<u>avg.txt' - the output is the average over all trials (3 used in manuscript).
+<p/>&gt;&gt;&gt; ARGS="/full/path/to/Model</u>SPNspineAChm4R_Gshydr5_GapD-stimtheta-noReb_DaDec1,,Ca Da ACh,10 20" 
+<br/>&gt;&gt;&gt; execfile('/full/path/to/NeuroRDanal/nrdh5_anal.py') 
+<p/>This processes the h5 file with filename=Model_SPNspineAChm4R_Gshydr5_GapD-stimtheta-noReb_DaDec1.h5 (since no parameters given)
+To create the figure, plot the columns with suffix _dend for the dendrite and _sa1[0] for the spine.
+</p><p>To generate output files for creating panels for figure 4, run sig.py as follows:
+First, set outputavg=2 in sig.py to produce output files.  Then, from within python type 
+<p/>&gt;&gt;&gt; ARGS="/full/path/to/Model_SPNspineAChm4R_Gshydr5_GapD-stim20hz-noReb_lowDaDec2,,PkcCaDag,Epac1cAMP,10 20,,Pkc Epac1"
+<br/>&gt;&gt;&gt; execfile('/full/path/to/NeuroRDanal/sig.py')
+<br/>&gt;&gt;&gt; ARGS="/full/path/to/Model_SPNspineAChm4R_Gshydr5_GapD-stimtheta-noReb_DaDec1,,PkcCaDag,Epac1cAMP,10 20,Pkc Epac1"
+<br/>&gt;&gt;&gt; execfile('/full/path/to/NeuroRDanal/sig.py')
+<p/>The last two arguments (args[6]) give the suffix for the output file,
+This produces output for Figures B and D with filename = input_filename + outputfile_suffix+'_plas.txt'
+<br/>Plot the columns with prefix nonspine for the right side (Dendrite) of the figure, and the columns with prefix sa1[0] for the left side (Spine) of the figure.  In the column headings, the suffix _t0, _t1, _t2 indicate trials 0, 1 and 2 - all of which are shown in the figures.
+<br/>For PKA phosphorylation targets: need to sum together several molecules:
+<p/>pDaD1RGs pGsD1R pPDE10 pPDE10cAMP pPDE4 pPDE4cAMp D32p34 D32p34PP1 D32p34PP1PP2BCamCa4 D32p34PP1PP2BCamCa2C
+<p/>For phosphorylated CamKII, also need to sum together several molecules:
+<p/>CKpCamCa4 Dgl_CKpCamCa4 CaDgl_CKpCamCa4 Dgl_CKp CKp 
+<p/>sig.py does this - you just give several molecules instead of a single molecule for arguments 2 and 3 as follows:  
+<p/>&gt;&gt;&gt; ARGS="/full/path/to/Model_SPNspineAChm4R_Gshydr5_GapD,stim noReb,pDaD1RGs pGsD1R pPDE10 pPDE10cAMP pPDE4 pPDE4cAMp D32p34 D32p34PP1,CKpCamCa4 Dgl_CKpCamCa4 CaDgl_CKpCamCa4 Dgl_CKp CKp,10 20,,PKAphos CKpCam"
+<p/>Above shows how to use two parameters (stim and noReb) to construct pattern to specify multiple files.
+<p/>&gt;&gt;&gt; execfile('/full/path/to/NeuroRDanal/sig.py')
+<p/>This produces output for figures A and C in Figure 4.
 
+</p>
 </body>
 </html>
