@@ -1,0 +1,44 @@
+<StimulationSet>
+
+    <!-- keep the ACh bath in these - compare to Da100 results-->
+  <InjectionStim specieID="Da" injectionSite="sa1[0].pointA">
+        <onset>               20000         </onset>
+        <duration>            100           </duration>
+        <rate>                45           </rate>
+  </InjectionStim>
+
+  <InjectionStim specieID="Da" injectionSite="dend:submembrane">
+        <onset>               20000         </onset>
+        <duration>            100           </duration>
+        <rate>                45           </rate>
+  </InjectionStim>
+
+      <InjectionStim specieID="Da" injectionSite="sa1[0].pointA">
+        <onset>           20100        </onset>
+        <duration>       99900.0       </duration>
+        <rate>               6.0    </rate>
+      </InjectionStim>
+      <InjectionStim specieID="Da" injectionSite="dend:submembrane">
+        <onset>           20100        </onset>
+        <duration>       99900.0       </duration>
+        <rate>               6.0    </rate>
+      </InjectionStim>
+
+<!-- basal ACh stim value for entire sim = desired conc * decay rate -->
+<InjectionStim specieID="ACh" injectionSite="dend:submembrane">
+        <onset>               0          </onset>
+        <duration>            300000      </duration>
+        <rate>                0.3         </rate>
+</InjectionStim>
+<InjectionStim specieID="CyA" injectionSite="dend:submembrane">
+        <onset>               2000          </onset>
+        <duration>            90      </duration>
+        <rate>                45         </rate>
+</InjectionStim>
+<InjectionStim specieID="CyA" injectionSite="sa1[0].pointA">
+        <onset>               2000          </onset>
+        <duration>            90      </duration>
+        <rate>                25         </rate>
+</InjectionStim>
+
+</StimulationSet>

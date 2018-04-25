@@ -1,0 +1,48 @@
+<html>
+<h2>Model files for simulating the signaling pathways underlying striatal LTP and LTD</h2>
+</p>
+<p>Published in Blackwell et al., European J. Neuroscience 2018
+</p>
+<p><em>Signaling pathways include:</em>
+</p>
+<ol>
+  <li>dopamine D1R coupled pathways (activatin of Gs subtype of GTP binding protein, leading to cAMP, PKA and Epac)
+  </li><li>calcium activated pathways (leading to PP2B,
+  </li><li>metabotropic glutamate mGluR1/5 coupled pathways (activation of Gq subtype of GTP binding protein, leading to PLC and DAG)
+  </li><li>muscarinic acetylcholine receptors: M1R (Gq coupled) and M4R (Gi coupled - inhibition of cAMP)
+  </li><li>Molecules mediating interaction of these pathways, such as DARPP-32
+</li></ol>
+<p>This model represents a synthesis/merger of the models presented in Oliveria et al. PLoS Comp Biol 2012 and the model presented in Kim et al. PLoS Comp Biol 2013.
+</p>
+<p><b>Modelxxx.xml contain the entire model specification</b>, which combines Reaction file (Rxn<em>.xml), Morphology file (Morph</em>.xml), initial conditions file (IC<em>.xml), output file (Out</em>.xml) and stimulation (Stim*.xml).  Most simulation experiments involve changing the stimulation. To run simulations, use NeuroRDv3.2.3:
+</p>
+<p>java -jar  /home/neuroware/stochdif/neurord-3.2.3-all-deps.jar Modelfile.xml
+</p>
+<p>The two main (control) Model files are:
+</p>
+<ul>
+  <li>Model_SPNspineAChm4R_Gshydr5_GapD-stim20hz-noReb_lowDaDec3.xml
+  </li><li>Model_SPNspineAChm4R_Gshydr5_GapD-stimtheta-noReb_DaDec1.xml
+</li></ul>
+<p>Variations on running the models, e.g. by specifying initial conditions from a different (e.g. equilibrium) simulation, or running multiple trials, are illustrated in NeuroRD.bat, and explained in <a href="https://github.com/neurord/stochdiff">https://github.com/neurord/stochdiff</a>
+</p>
+<p>Model output was processed using the python programs in <a href="https://github.com/neurord/NeuroRDanal">https://github.com/neurord/NeuroRDanal</a>
+</p>
+<ul>
+  <li>nrdh5_anal.py produce graphs of molecules for one or more files, and optionally will generate outpu files of molecule concentration versus time for various morhpology subregions.
+  </li><li>sig.py calculates one or two "signatures" from sets of molecules by adding together the specified molecules.  E.g. to calculcate the total PKA phosphorylated DARPP-32, you would add D32p34PP1 and D32p34.
+  </li><li>sig2.py calculates the mean value of a set of molecule signatures at specified time points to use in statistical analysis.
+</li></ul>
+<p>The Model reaction kinetics and molecule quantities are summarized in MSPN-mergeRateConstTable.xls, along with a list of all the different models, and publications that provided data for constraining the model. There are two main sets of model files:
+</p>
+<ol>
+  <li>those used to constrain to model.  These include simulations of the change in DARPP-32 phosphorylation in response to bath applied drugs, and simulations of depolarization induced suppression of inhibition.
+  </li><li>Synaptic plasticity protocols.  These include both stimulation protocols with known outcomes, and stimulation protocols not yet measured experimentally.
+</li></ol>
+<p>Output files (prior to processing with NeuroRDanal) are provide as .h5 files for all but the long dendrite simulations due to size.
+</p>
+<p>Entire repository, including Notebook files, are available at <a href="https://github.com/neurord/D1pathways">https://github.com/neurord/D1pathways</a>
+</p>
+
+</body>
+</html>
