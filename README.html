@@ -29,7 +29,7 @@
 <p>Model output was processed using the python programs in <a href="https://github.com/neurord/NeuroRDanal">https://github.com/neurord/NeuroRDanal</a>
 </p>
 <ul>
-  <li>nrdh5_anal.py produce graphs of molecules for one or more files, and optionally will generate outpu files of molecule concentration versus time for various morhpology subregions.
+  <li>nrdh5_anal.py produce graphs of molecules for one or more files, and optionally will generate output files of molecule concentration versus time for various morphology subregions.
   </li><li>sig.py calculates one or two "signatures" from sets of molecules by adding together the specified molecules.  E.g. to calculcate the total PKA phosphorylated DARPP-32, you would add D32p34PP1 and D32p34.
   </li><li>sig2.py calculates the mean value of a set of molecule signatures at specified time points to use in statistical analysis.
 </li></ul>
@@ -56,13 +56,17 @@ First, set outputavg=1 in nrdh5_anal.py to produce output files.  Then, from wit
 <br/>&gt;&gt;&gt; execfile('/full/path/to/NeuroRDanal/nrdh5_anal.py')
 <p/>This processes h5 files whose filename matches the following pattern: arg[0]+'-'+arg[1]+'*.h5'
 And then produces output with filename = input_filename + molname+'<u>avg.txt' - the output is the average over all trials (3 used in manuscript).
-<p/>&gt;&gt;&gt; ARGS="/full/path/to/Model</u>SPNspineAChm4R_Gshydr5_GapD-stimtheta-noReb_DaDec1,,Ca Da ACh,10 20" 
+  <p/><b>Sample 20 Hz run:</b>
+  <p/><img src="images/model_spnspineachm4r_gshydr5_gapd-stim20hznoreb.png" alt="20 Hz screenshot">
+  <p/>&gt;&gt;&gt; ARGS="/full/path/to/Model</u>SPNspineAChm4R_Gshydr5_GapD-stimtheta-noReb_DaDec1,,Ca Da ACh,10 20" 
 <br/>&gt;&gt;&gt; execfile('/full/path/to/NeuroRDanal/nrdh5_anal.py') 
 <p/>This processes the h5 file with filename=Model_SPNspineAChm4R_Gshydr5_GapD-stimtheta-noReb_DaDec1.h5 (since no parameters given)
 To create the figure, plot the columns with suffix _dend for the dendrite and _sa1[0] for the spine.
+<p/><b>Sample theta burst stimulation run:</b>
+<p/><img src="images/model_spnspineachm4r_gshydr5_gapd-stimtheta-noreb_dadec1.png" alt="20 Hz screenshot">
 </p><p>To generate output files for creating panels for figure 4, run sig.py as follows:
 First, set outputavg=2 in sig.py to produce output files.  Then, from within python type 
-<p/>&gt;&gt;&gt; ARGS="/full/path/to/Model_SPNspineAChm4R_Gshydr5_GapD-stim20hz-noReb_lowDaDec2,,PkcCaDag,Epac1cAMP,10 20,,Pkc Epac1"
+<p/>&gt;&gt;&gt; ARGS="/full/path/to/Model_SPNspineAChm4R_Gshydr5_GapD-stim20hz-noReb_lowDaDec3,,PkcCaDag,Epac1cAMP,10 20,,Pkc Epac1"
 <br/>&gt;&gt;&gt; execfile('/full/path/to/NeuroRDanal/sig.py')
 <br/>&gt;&gt;&gt; ARGS="/full/path/to/Model_SPNspineAChm4R_Gshydr5_GapD-stimtheta-noReb_DaDec1,,PkcCaDag,Epac1cAMP,10 20,Pkc Epac1"
 <br/>&gt;&gt;&gt; execfile('/full/path/to/NeuroRDanal/sig.py')
